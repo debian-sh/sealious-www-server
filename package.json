@@ -1,6 +1,6 @@
 {
   "name": "sealious-www-server",
-  "version": "0.6.4",
+  "version": "0.6.3",
   "tag": "beta",
   "keywords": [
     "sealious-plugin"
@@ -17,6 +17,13 @@
     "clone": "^1.0.2",
     "color": "^0.8.0",
     "hapi": "^8.4.0",
+    "request-promise": "^1.0.2",
     "sha1": "^1.1.0"
-  }
+  },
+  "gitHead": "8e4bc74194b98675964e8fb2953776eece3c3fa5",
+  "readme": "ERROR: No README data found!",
+  "_id": "sealious-www-server@0.6.3",
+  "_shasum": "fdd8db70a2d4aee3881cdfb8324cc9f8768eeec7",
+  "_from": "git+https://github.com/modliszka/sealious-www-server.git",
+  "_resolved": "git+https://github.com/modliszka/sealious-www-server.git#8e4bc74194b98675964e8fb2953776eece3c3fa5"
 }
