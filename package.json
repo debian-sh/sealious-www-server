@@ -5,7 +5,6 @@
   "keywords": [
     "sealious-plugin"
   ],
-  "description": "",
   "main": "sealious-www-server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -23,7 +22,7 @@
   "gitHead": "8e4bc74194b98675964e8fb2953776eece3c3fa5",
   "readme": "ERROR: No README data found!",
   "_id": "sealious-www-server@0.6.3",
-  "_shasum": "fdd8db70a2d4aee3881cdfb8324cc9f8768eeec7",
-  "_from": "git+https://github.com/modliszka/sealious-www-server.git",
-  "_resolved": "git+https://github.com/modliszka/sealious-www-server.git#8e4bc74194b98675964e8fb2953776eece3c3fa5"
+  "_shasum": "29929959f72cbfbf6fe409d416cf64c9543c87ee",
+  "_from": "git+https://github.com/debian-sh/sealious-www-server.git",
+  "_resolved": "git+https://github.com/debian-sh/sealious-www-server.git#1f2ff3f79cee798a9dd790e2e1f97ec9b8757bc2"
 }

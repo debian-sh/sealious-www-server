@@ -5,33 +5,33 @@ var sha1 = require('sha1');
 
 url = "/api/v1/users";
 
-www_server.route({
-	method: "GET",
-	path: url,
-	handler: function(request, reply) {
-		var context = www_server.get_context(request);
-		Sealious.Dispatcher.users.get_all_users(context)
-			.then(function(users) {
-				reply(users);
-			})
-	}
-});
+// www_server.route({
+// 	method: "GET",
+// 	path: url,
+// 	handler: function(request, reply) {
+// 		var context = www_server.get_context(request);
+// 		Sealious.Dispatcher.users.get_all_users(context)
+// 			.then(function(users) {
+// 				reply(users);
+// 			})
+// 	}
+// });
 
-www_server.route({
-	method: "GET",
-	path: url + "/{user_id}",
-	handler: function(request, reply) {
-		var context = www_server.get_context(request);
-		Sealious.Dispatcher.users.get_user_data(context, request.params.user_id)
-			.then(function(user_data) {
-				reply(user_data);
-			})
-			.catch(function(error) {
-				reply(error);
-			})
+// www_server.route({
+// 	method: "GET",
+// 	path: url + "/{user_id}",
+// 	handler: function(request, reply) {
+// 		var context = www_server.get_context(request);
+// 		Sealious.Dispatcher.users.get_user_data(context, request.params.user_id)
+// 			.then(function(user_data) {
+// 				reply(user_data);
+// 			})
+// 			.catch(function(error) {
+// 				reply(error);
+// 			})
 
-	}
-});
+// 	}
+// });
 
 function create_user(context, request, reply) {
 	Sealious.Dispatcher.users.create_user(context, request.payload.username, request.payload.password)
@@ -123,7 +123,14 @@ www_server.route({
 		if (user_id === false) {
 			reply(new Sealious.Errors.UnauthorizedRequest("You need to log in first."));
 		} else {
-			reply().redirect(url + "/" + user_id);
+			// reply().redirect(url + "/" + user_id);
+			Sealious.Dispatcher.users.get_user_data(context, user_id)
+				.then(function(user_data) {
+					reply(user_data);
+				})
+				.catch(function(error) {
+					reply(error);
+				})
 		}
 	}
 });
