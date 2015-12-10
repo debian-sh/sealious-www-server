@@ -5,6 +5,10 @@ var sha1 = require('sha1');
 
 url = "/api/v1/users";
 
+www_server.state('SealiousSession',{
+	ttl: 2592000000
+})
+
 // www_server.route({
 // 	method: "GET",
 // 	path: url,
