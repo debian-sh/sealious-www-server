@@ -5,10 +5,6 @@ var sha1 = require('sha1');
 
 url = "/api/v1/users";
 
-www_server.state('SealiousSession',{
-	ttl: 2592000000
-})
-
 // www_server.route({
 // 	method: "GET",
 // 	path: url,
@@ -148,9 +144,9 @@ www_server.route({
 			.then(function(user_id) {
 				var session_id = www_server.new_session(user_id);
 				if (request.payload.redirect_success) {
-					reply().state('SealiousSession', session_id).redirect(request.payload.redirect_success);
+					reply().state('SealiousSession', session_id, {ttl: 2592000000}).redirect(request.payload.redirect_success);
 				} else {
-					reply("http_session: Logged in!").state('SealiousSession', session_id);
+					reply("http_session: Logged in!").state('SealiousSession', session_id, {ttl: 2592000000});
 				}
 			})
 			.catch(function(error) {
