@@ -2,6 +2,7 @@ var Sealious = require("sealious");
 var rp = require('request-promise');
 var www_server = Sealious.ChipManager.get_chip("channel", "www_server");
 var sha1 = require('sha1');
+var crypto = require('crypto');
 
 url = "/api/v1/users";
 
@@ -140,18 +141,22 @@ www_server.route({
 	path: "/login",
 	handler: function(request, reply) {
 		var context = www_server.get_context(request);
-		Sealious.Dispatcher.users.password_match(context, request.payload.username, request.payload.password)
-			.then(function(user_id) {
-				var session_id = www_server.new_session(user_id);
-				if (request.payload.redirect_success) {
-					reply().state('SealiousSession', session_id, {ttl: 2592000000}).redirect(request.payload.redirect_success);
-				} else {
-					reply("http_session: Logged in!").state('SealiousSession', session_id, {ttl: 2592000000});
-				}
-			})
-			.catch(function(error) {
-				reply(error);
-			})
+		crypto.pbkdf2(request.payload.password, "", 4096, 64, "md5", function(err, key){
+			var password_hashed = key.toString('hex');
+			Sealious.Dispatcher.users.password_match(context, request.payload.username, password_hashed)
+				.then(function(user_id) {
+					var session_id = www_server.new_session(user_id);
+					if (request.payload.redirect_success) {
+						reply().state('SealiousSession', session_id, {ttl: 2592000000}).redirect(request.payload.redirect_success);
+					} else {
+						reply("http_session: Logged in!").state('SealiousSession', session_id, {ttl: 2592000000});
+					}
+				})
+				.catch(function(error) {
+					reply(error);
+				})
+		});
+		// Sealious.Dispatcher.users.password_match(context, request.payload.username, request.payload.password)
 	}
 });
 
